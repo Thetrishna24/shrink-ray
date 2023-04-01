@@ -30,4 +30,13 @@ async function getUserById(userId: string): Promise<User | null> {
   return user;
 }
 
-export { getUserByUserName, addNewUser, getUserById };
+async function updateUsername(userId: string, NewUsername: string): Promise<void> {
+  await userRepository
+    .createQueryBuilder()
+    .update(User)
+    .set({ username: NewUsername })
+    .where({ userId })
+    .execute();
+}
+
+export { getUserByUserName, addNewUser, getUserById, updateUsername };
