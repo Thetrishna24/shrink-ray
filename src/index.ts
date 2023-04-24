@@ -27,6 +27,8 @@ app.post('/api/users', UserController.registerUser);
 app.post('/api/login', UserController.logIn);
 app.post('/api/links', LinkController.shortenUrl);
 
+app.use(express.static('public', { extensions: ['html'] }));
+
 app.get('/:targetLinkId', LinkController.getOriginalUrl);
 app.get('/api/users/:userId/links', LinkController.getLinksByUser);
 
