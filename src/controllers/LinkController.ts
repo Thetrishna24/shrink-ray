@@ -14,7 +14,7 @@ import { getUserById } from '../models/UserModel';
 async function shortenUrl(req: Request, res: Response): Promise<void> {
   // Check if user is logged in
   if (!req.session.isLoggedIn) {
-    res.sendStatus(401);
+    res.redirect('/login');
     return;
   }
   const { userId, isPro, isAdmin } = req.session.authenticatedUser;
@@ -91,7 +91,7 @@ async function deleteLink(req: Request, res: Response): Promise<void> {
   // Get the link from the database
   const link = await getLinkById(linkId);
   if (!link) {
-    res.sendStatus(404);
+    res.redirect('/login');
     return;
   }
 

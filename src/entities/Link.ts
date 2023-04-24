@@ -15,6 +15,6 @@ export class Link {
   @Column()
   numHits: number;
 
-  @ManyToOne(() => User, (user) => user.link)
+  @ManyToOne(() => User, (user) => user.link, { cascade: ['insert', 'update'] })
   user: Relation<User>[];
 }

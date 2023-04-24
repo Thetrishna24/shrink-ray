@@ -22,21 +22,21 @@ function createLinkId(originalUrl: string, userId: string): string {
   const md5 = createHash('md5');
   md5.update(originalUrl + userId);
   const urlHash = md5.digest('base64url');
-  const linkId = urlHash.slice(0, 9);
+  const linkId = urlHash.substring(0, 9);
 
   return linkId;
 }
 
 async function createNewLink(originalUrl: string, linkId: string, creator: User): Promise<Link> {
-  let link = new Link();
-  link.linkId = linkId;
-  link.originalURL = originalUrl;
-  link.numHits = 0;
-  link.user = [creator];
+  let newLink = new Link();
+  newLink.linkId = linkId;
+  newLink.originalURL = originalUrl;
+  newLink.numHits = 0;
+  newLink.user = [creator];
 
-  link = await linkRepository.save(link);
+  newLink = await linkRepository.save(newLink);
 
-  return link;
+  return newLink;
 }
 
 async function updateLinkVisits(link: Link): Promise<Link> {

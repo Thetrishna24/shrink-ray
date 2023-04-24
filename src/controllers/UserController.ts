@@ -19,7 +19,7 @@ async function registerUser(req: Request, res: Response): Promise<void> {
     const newUser = await addNewUser(username, passwordHash);
     console.log(newUser);
     // Return a success message
-    res.status(201).send('User registered successfully');
+    res.redirect('/login');
   } catch (err) {
     console.error(err);
     const databaseErrorMessage = parseDatabaseError(err);
@@ -52,7 +52,7 @@ async function logIn(req: Request, res: Response): Promise<void> {
   };
   req.session.isLoggedIn = true;
 
-  res.sendStatus(200);
+  res.redirect('/shrink');
 }
 
 export default { registerUser, logIn };
